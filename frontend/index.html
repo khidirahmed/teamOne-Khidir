@@ -111,7 +111,7 @@
     }
 
     .map-btn {
-      background: var(--gray-btn);
+      background: transparent;
       border: 3px solid #888;
       box-shadow: 4px 4px 0 #666;
       padding: 28px 16px;
@@ -420,7 +420,10 @@
     <h1>Bobcat Go!</h1>
     <div class="main-content">
       <div class="maps">
-        <button class="map-btn" onclick="selectMap(this)">Map 1</button>
+        <button class="map-btn" onclick="selectMap(this)">
+          <img src="map1.png" alt="map1" style="height:48px; image-rendering:pixelated;" />
+        </button>
+
         <button class="map-btn" onclick="selectMap(this)">Map 2</button>
       </div>
       <div class="right-panel">
