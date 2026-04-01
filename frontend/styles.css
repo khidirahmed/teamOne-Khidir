@@ -1,8 +1,4 @@
-body {
 
-}
-
-<style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -398,4 +394,3 @@ body {
       background: #cd7c3a !important;
       border-color: #8a4a10 !important;
     }
-  </style>
