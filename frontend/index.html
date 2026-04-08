@@ -12,17 +12,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bobcat Go!</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css">  
+  <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/game.js" defer></script>
 </head>
 
 <body>
-
   <header id="player-header">
-    <h2 id="player-name">Player: </h2>
   </header>
-
   <main>
     <!-- LANDING PAGE -->
     <div id="landing" class="screen active">
@@ -31,14 +30,14 @@
         <!----will be used later for map UI>
         <div class="maps">
           <button class="map-btn" onclick="selectMap(this)">
-            <img src="map1.png" alt="map1" style="height:48px; image-rendering:pixelated;" />
+            <img src="assets/map1.png" alt="map1" style="height:48px; image-rendering:pixelated;" />
           </button>
 
           <button class="map-btn" onclick="selectMap(this)">Map 2</button>
         </div>
       -->
         <div class="right-panel">
-          <img src="frontsprint.png" alt="Bobcat" class="cat-img" />
+          <img src="assets/frontsprint.png" alt="Bobcat" class="cat-img" />
           <div class="login-form">
             <div class="form-row">
               <label>email:</label>
@@ -50,13 +49,13 @@
             </div>
           </div>
           <div class="auth-btns">
-    <button class="play-btn" onclick="goSignUp()">
-      <img src="signup.png" alt="SIGN UP" style="height:33px; image-rendering:pixelated;" />
-    </button>
-    <button class="play-btn" onclick="goSignIn()">
-      <img src="signin.png" alt="SIGN IN" style="height:33px; image-rendering:pixelated;" />
-    </button>
-  </div>
+            <button class="play-btn" onclick="goSignUp()">
+              <img src="assets/signup.png" alt="SIGN UP" style="height:33px; image-rendering:pixelated;" />
+            </button>
+            <button class="play-btn" onclick="goSignIn()">
+              <img src="assets/signin.png" alt="SIGN IN" style="height:33px; image-rendering:pixelated;" />
+            </button>
+          </div>
         </div>
       </div>
       <div class="tagline">***Explore New Worlds***</div>
@@ -121,44 +120,9 @@
         </div>
       </div>
     </div>
-
-    <script>
-      let currentUser = '';
-
-      function showScreen(id) {
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-      }
-
-      function selectMap(btn) {
-        document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-      }
-
-      function updateLeaderboard() {
-        if (!currentUser) return;
-        // highlight the current user's row if they appear, otherwise add them
-        const rows = document.querySelectorAll('.lb-row');
-        let found = false;
-        rows.forEach(row => {
-          const cell = row.querySelector('div');
-          if (cell.textContent === currentUser) {
-            cell.style.fontWeight = 'bold';
-            cell.style.color = '#5a4fa0';
-            found = true;
-          }
-        });
-        // if not already on board, update last row with their name
-        if (!found && rows.length > 0) {
-          rows[rows.length - 1].querySelector('div').textContent = currentUser;
-        }
-      }
-    </script>
-
-
   </main>
 
-  
+
 </body>
 
-</html>
+</html
