@@ -23,6 +23,7 @@
   <div id="landing" class="screen active">
     <h1>Bobcat Go!</h1>
     <div class="main-content">
+      <!----will be used later for map UI>
       <div class="maps">
         <button class="map-btn" onclick="selectMap(this)">
           <img src="map1.png" alt="map1" style="height:48px; image-rendering:pixelated;" />
@@ -30,6 +31,7 @@
 
         <button class="map-btn" onclick="selectMap(this)">Map 2</button>
       </div>
+    -->
       <div class="right-panel">
         <img src="frontsprint.png" alt="Bobcat" class="cat-img" />
         <div class="login-form">
@@ -42,9 +44,14 @@
             <input type="text" id="password" autocomplete="off" placeholder="enter password" />
           </div>
         </div>
-        <button class="play-btn" onclick="goPlay()">
-          <img src="image 10.png" alt="PLAY" style="height:48px; image-rendering:pixelated;" />
-        </button>
+        <div class="auth-btns">
+  <button class="play-btn" onclick="goSignUp()">
+    <img src="signup.png" alt="SIGN UP" style="height:33px; image-rendering:pixelated;" />
+  </button>
+  <button class="play-btn" onclick="goSignIn()">
+    <img src="signin.png" alt="SIGN IN" style="height:33px; image-rendering:pixelated;" />
+  </button>
+</div>
       </div>
     </div>
     <div class="tagline">***Explore New Worlds***</div>
