@@ -1,0 +1,128 @@
+<!-- everytime i make a significant change
+ git add . 
+ git commit -m "and then description of what you changed"
+ git push
+ -->
+<!-- hello world -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bobcat Go!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/game.js" defer></script>
+</head>
+
+<body>
+  <header id="player-header">
+  </header>
+  <main>
+    <!-- LANDING PAGE -->
+    <div id="landing" class="screen active">
+      <h1>Bobcat Go!</h1>
+      <div class="main-content">
+        <!----will be used later for map UI>
+        <div class="maps">
+          <button class="map-btn" onclick="selectMap(this)">
+            <img src="assets/map1.png" alt="map1" style="height:48px; image-rendering:pixelated;" />
+          </button>
+
+          <button class="map-btn" onclick="selectMap(this)">Map 2</button>
+        </div>
+      -->
+        <div class="right-panel">
+          <img src="assets/frontsprint.png" alt="Bobcat" class="cat-img" />
+          <div class="login-form">
+            <div class="form-row">
+              <label>email:</label>
+              <input type="text" id="username" autocomplete="off" placeholder="enter email" />
+            </div>
+            <div class="form-row">
+              <label>password:</label>
+              <input type="text" id="password" autocomplete="off" placeholder="enter password" />
+            </div>
+          </div>
+          <div class="auth-btns">
+            <button class="play-btn" onclick="goSignUp()">
+              <img src="assets/signup.png" alt="SIGN UP" style="height:33px; image-rendering:pixelated;" />
+            </button>
+            <button class="play-btn" onclick="goSignIn()">
+              <img src="assets/signin.png" alt="SIGN IN" style="height:33px; image-rendering:pixelated;" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="tagline">***Explore New Worlds***</div>
+      <div class="bottom-bar">
+        <button class="lb-link-btn" onclick="showScreen('leaderboard')">🏆 Leaderboard</button>
+      </div>
+    </div>
+
+    <!-- GAME PLACEHOLDER -->
+    <div id="game" class="screen">
+      <p>[ game screen ]<br />coming soon</p>
+      <button class="back-btn-game" onclick="showScreen('landing')">Back</button>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div id="leaderboard" class="screen">
+      <div class="top-bar">
+        <button class="back-btn" onclick="showScreen('landing')">Back</button>
+        <div class="music-btn">🎵</div>
+      </div>
+      <div class="lb-panel">
+        <div class="lb-title">Leaderboard</div>
+        <div class="lb-header">
+          <div>User</div>
+          <div>Time</div>
+          <div>Rank</div>
+        </div>
+        <div class="lb-row">
+          <div>username1</div>
+          <div>00:00:00</div>
+          <div class="rank-badge rank-1">1st</div>
+        </div>
+        <div class="lb-row">
+          <div>username2</div>
+          <div>00:00:00</div>
+          <div class="rank-badge rank-2">2nd</div>
+        </div>
+        <div class="lb-row">
+          <div>username3</div>
+          <div>00:00:00</div>
+          <div class="rank-badge rank-3">3rd</div>
+        </div>
+        <div class="lb-row">
+          <div>username4</div>
+          <div>00:00:00</div>
+          <div>4th</div>
+        </div>
+        <div class="lb-row">
+          <div>username5</div>
+          <div>00:00:00</div>
+          <div>5th</div>
+        </div>
+        <div class="lb-row">
+          <div>username6</div>
+          <div>00:00:00</div>
+          <div>6th</div>
+        </div>
+        <div class="lb-row">
+          <div>username7</div>
+          <div>00:00:00</div>
+          <div>7th</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+</body>
+
+</html
