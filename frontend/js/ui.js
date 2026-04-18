@@ -35,3 +35,7 @@ function updateLeaderboard() {
     rows[rows.length - 1].querySelector('div').textContent = currentUser;
   }
 }
+
+function goBack() {
+  showScreen('mapselect');
+}
