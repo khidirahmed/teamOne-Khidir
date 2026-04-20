@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://bb68wtl1nrb2p" path="res://scenes/city_background.gd" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://btisvfgvi8otn" path="res://assets/Sprites/NYC_Background.png" id="3_lnu2h"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
-distance = -1099.0001
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
+distance = -11.0
 
 [node name="Game" type="Node2D" unique_id=1708166018]
 position = Vector2(0, -8)
@@ -14,39 +14,36 @@ script = ExtResource("1_u5sy4")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=562728589]
 layer = -1
+follow_viewport_enabled = true
+scroll_base_scale = Vector2(0, 0)
 scroll_ignore_camera_zoom = true
 
 [node name="CityBackground" type="ParallaxLayer" parent="ParallaxBackground" unique_id=146025878]
-position = Vector2(0, -11)
+position = Vector2(3, -8)
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(1436, 0)
 script = ExtResource("2_lnu2h")
 
 [node name="City Background" type="Sprite2D" parent="ParallaxBackground/CityBackground" unique_id=1058074586]
-position = Vector2(-2, 12)
+scale = Vector2(1, 0.96)
 texture = ExtResource("3_lnu2h")
 centered = false
-
-[node name="City Background2" type="Sprite2D" parent="ParallaxBackground/CityBackground" unique_id=1062557208]
-position = Vector2(12, 12)
-texture = ExtResource("3_lnu2h")
-centered = false
-offset = Vector2(1436, 0)
-
-[node name="Player" parent="." unique_id=643120520 instance=ExtResource("1_uwrxv")]
-position = Vector2(118.00002, 396)
-scale = Vector2(0.2, 0.2)
-up_direction = Vector2(0, 1)
-slide_on_ceiling = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=304565821]
 position = Vector2(716, 298)
 scale = Vector2(0.9999998, 0.9999998)
 limit_enabled = false
 
+[node name="Player" parent="." unique_id=643120520 instance=ExtResource("1_uwrxv")]
+position = Vector2(118, 421)
+scale = Vector2(0.2, 0.2)
+slide_on_ceiling = false
+floor_max_angle = 1.7453293
+floor_snap_length = 5.0
+
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1855669722]
 position = Vector2(1005, -57)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=627831565]
-position = Vector2(-894, -469)
-shape = SubResource("WorldBoundaryShape2D_uwrxv")
+position = Vector2(1158, 642)
+shape = SubResource("WorldBoundaryShape2D_lbhrr")

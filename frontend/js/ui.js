@@ -7,12 +7,6 @@ function showScreen(id) {
   document.getElementById(id).classList.add('active');
 }
 
-
-function startGame(mapId) {
-  currentMapId = mapId;
-  showScreen('game');
-}
-
 function selectMap(btn) {
   document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
@@ -40,4 +34,3 @@ function updateLeaderboard() {
 function goBack() {
   showScreen('mapselect');
 }
-

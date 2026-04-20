@@ -4,12 +4,17 @@ const OBSTACLES = [
 	preload("res://scenes/obstacle_trashcan.tscn"),
 	preload("res://scenes/obstacle_pigeon.tscn"),
 ]
+const RUN_STARTED_MESSAGE := "window.parent.postMessage({ type: 'bobcat-go:run-started' }, '*');"
 
 @export var spawn_x: float = 1400.0
 var spawn_positions = [235.0, -70]  # trashcan, pigeon
 
 var timer: float = 1.9
 var spawn_interval: float = 2.0
+
+func _ready() -> void:
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval(RUN_STARTED_MESSAGE)
 
 func _process(delta: float) -> void:
 	timer += delta

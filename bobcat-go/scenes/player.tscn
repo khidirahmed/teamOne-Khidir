@@ -27,11 +27,12 @@ position = Vector2(-48, 1336)
 script = ExtResource("1_qhqgy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1134961038]
-position = Vector2(82, 202)
+position = Vector2(49, 295)
+scale = Vector2(0.8972028, 0.86910737)
 sprite_frames = SubResource("SpriteFrames_hqtel")
 autoplay = "default"
 frame_progress = 0.7770721
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=714499711]
-position = Vector2(10, 440)
+position = Vector2(-12, 436)
 shape = SubResource("CapsuleShape2D_g2els")

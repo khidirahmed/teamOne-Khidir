@@ -1,117 +1,132 @@
-//authorization / authn
+// authorization / authn
 
-const supabaseUrl = "https://rkqcnibvsvbjxdwjklim.supabase.co";
-const supabaseAnonKey = "sb_publishable_08eKwdrsBXZWTzvH04hzJg_G6Z-ZgnV";
+const bobcatGoConfig = window.BOBCAT_GO_CONFIG || {};
+const supabaseUrl = typeof bobcatGoConfig.supabaseUrl === "string"
+  ? bobcatGoConfig.supabaseUrl.trim()
+  : "";
+const supabaseAnonKey = typeof bobcatGoConfig.supabaseAnonKey === "string"
+  ? bobcatGoConfig.supabaseAnonKey.trim()
+  : "";
 
-const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
-console.log("script.js loaded");
+const supabaseClient = supabaseUrl && supabaseAnonKey && window.supabase
+  ? window.supabase.createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 // Store these globally so the game can use them later
 let currentUserId = null;
 let currentMapId = null;
 
-/**
- * 
-async function goPlay() {
-  const email    = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
+function requireSupabaseClient() {
+  if (supabaseClient) {
+    return true;
+  }
+
+  console.error("Supabase is not configured. Add your project details to js/supabase-config.js.");
+  alert(
+    "Supabase is not configured yet. Copy js/supabase-config.example.js to js/supabase-config.js and add your project URL and publishable anon key.",
+  );
+  return false;
+}
+
+function getCredentials() {
+  const email = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   if (!email || !password) {
-    alert('Please enter your email and password.');
-    return;
+    alert("Please enter your email and password.");
+    return null;
   }
 
-  let { data: signInData, error: signInError } =
-    await supabaseClient.auth.signInWithPassword({ email, password });
-
-  if (signInError) {
-    const { data: signUpData, error: signUpError } =
-      await supabaseClient.auth.signUp({ email, password });
-
-    if (signUpError) {
-      alert('Auth error: ' + signUpError.message);
-      return;
-    }
-    currentUserId = signUpData.user?.id;
-  } else {
-    currentUserId = signInData.user?.id;
-  }
-
-  if (!currentUserId) {
-    alert('Could not get user ID. Please try again.');
-    return;
-  }
-
-  const selectedBtn = document.querySelector('.map-btn.selected');
-  const mapLabel    = selectedBtn ? selectedBtn.textContent.trim() : 'Map 1';
-  currentMapId      = mapLabel === 'Map 2' ? 2 : 1;
-
-  showScreen('game');
+  return { email, password };
 }
- * 
- */
 
 async function goSignUp() {
-  const email    = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  if (!email || !password) {
-    alert('Please enter your email and password.');
+  if (!requireSupabaseClient()) {
     return;
   }
 
-  const { data, error } = await supabaseClient.auth.signUp({ email, password });
+  const credentials = getCredentials();
+  if (!credentials) {
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp(credentials);
 
   if (error) {
-    alert('Sign up error: ' + error.message);
+    alert("Sign up error: " + error.message);
     return;
   }
 
   currentUserId = data.user?.id;
 
   if (!currentUserId) {
-    alert('Sign up succeeded but could not get user ID. Check your email to confirm your account.');
+    alert(
+      "Sign up succeeded but no user ID was returned. Disable email confirmation in Supabase for instant dev signup.",
+    );
     return;
   }
 
-  showScreen('mapselect');
+  showScreen("mapselect");
 }
 
 async function goSignIn() {
-  const email    = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  if (!email || !password) {
-    alert('Please enter your email and password.');
+  if (!requireSupabaseClient()) {
     return;
   }
 
-  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+  const credentials = getCredentials();
+  if (!credentials) {
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword(credentials);
 
   if (error) {
-    alert('Sign in error: ' + error.message);
+    alert("Sign in error: " + error.message);
     return;
   }
 
   currentUserId = data.user?.id;
-  showScreen('mapselect');
+  showScreen("mapselect");
 }
 
-//we will run this when the game ends
+// Save the finished run when the Godot iframe reports a game over.
 async function saveRun(stats) {
+  if (!requireSupabaseClient()) {
+    return false;
+  }
+
+  if (!currentUserId) {
+    console.warn("Skipping run save because no user is signed in.");
+    return false;
+  }
+
+  if (!Number.isInteger(currentMapId)) {
+    console.warn("Skipping run save because no map is selected.");
+    return false;
+  }
+
+  if (!stats || !stats.startedAt) {
+    console.warn("Skipping run save because the run start time is missing.");
+    return false;
+  }
+
+  const score = Math.max(0, Math.floor(Number(stats.score ?? 0)));
+
   const { error } = await supabaseClient
-    .from('runs')
+    .from("runs")
     .insert({
-      user_id:    currentUserId,
-      map_id:     currentMapId,
+      user_id: currentUserId,
+      map_id: currentMapId,
       started_at: stats.startedAt,
-      ended_at:   new Date().toISOString(),
-      score:      stats.score,
+      ended_at: new Date().toISOString(),
+      score,
     });
 
-  if (error) console.error('Failed to save run:', error.message);
+  if (error) {
+    console.error("Failed to save run:", error.message);
+    return false;
+  }
+
+  return true;
 }
-
-async function login(){
-
-};
