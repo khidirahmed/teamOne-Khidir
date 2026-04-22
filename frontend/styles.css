@@ -90,6 +90,12 @@
   gap: 24px;
 }
 
+#mapselect h1 {
+  color: #fff;
+  text-align: center;
+  text-shadow: 4px 4px 0 #3d3570; /* matches your landing title */
+  margin-bottom: 20px;
+}
     .maps {
       display: flex;
       flex-direction: column;
