@@ -1,0 +1,4 @@
+window.BOBCAT_GO_CONFIG = {
+  supabaseUrl: "https://jwsypdubqsvtpuuwzwnl.supabase.co",
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3c3lwZHVicXN2dHB1dXd6d25sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2MzMxNDcsImV4cCI6MjA5MjIwOTE0N30.e8LPf6buf6YY1P4n4RFI0kJchuN9YNoV3dQdAS2bOmI",
+};

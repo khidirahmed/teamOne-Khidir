@@ -3,7 +3,34 @@
 Bobcat Go is a static frontend plus a Godot web export. The app uses Supabase for
 email/password auth and to save completed runs.
 
-## Supabase Setup
+## Shared Supabase Setup
+
+This repo is already configured to use the shared Bobcat Go Supabase project, so
+anyone who clones it can sign up and save runs without creating a local config file.
+The committed frontend key is the publishable anon key only. Never replace it with
+the Supabase service-role key.
+
+For this shared setup to work, the Supabase project must keep these settings:
+
+1. Email/password auth enabled.
+2. Signups allowed.
+3. Email confirmation turned off for instant development signups.
+4. `supabase/bootstrap.sql` already applied to the project.
+
+## Running The Repo
+
+1. Start a static server from the repo root:
+
+```bash
+python3 -m http.server 8000
+```
+
+2. Open `http://localhost:8000/frontend/`.
+3. Sign up with a new account or sign in with an existing one.
+4. Start a run and finish a game.
+5. Check the shared Supabase project to confirm the run was saved in `public.runs`.
+
+## Using Your Own Supabase Project
 
 1. Create a new Supabase project.
 2. In the Supabase dashboard, go to `Authentication` -> `Providers` -> `Email`.
@@ -13,18 +40,6 @@ email/password auth and to save completed runs.
 6. Copy `frontend/js/supabase-config.example.js` to `frontend/js/supabase-config.js`.
 7. Paste your project URL and publishable anon key into `frontend/js/supabase-config.js`.
 8. Do not use the Supabase service-role key in the frontend.
-
-## Local Run
-
-1. Start a static server from the repo root:
-
-```bash
-python3 -m http.server 8000
-```
-
-2. Open `http://localhost:8000/frontend/`.
-3. Sign up with a new account and start a run.
-4. After a game over, check the `runs` table in Supabase to confirm the row was saved.
 
 ## What Gets Saved
 
@@ -43,5 +58,5 @@ run saving.
 ## Troubleshooting
 
 - If sign-up succeeds but no user ID is returned, email confirmation is still enabled.
-- If auth buttons show a setup alert, `frontend/js/supabase-config.js` is missing or empty.
+- If auth buttons show a setup alert, `frontend/js/supabase-config.js` is missing, empty, or no longer contains a valid shared project config.
 - If run saving fails, make sure you ran `supabase/bootstrap.sql` in your own project and signed in before starting the game.
